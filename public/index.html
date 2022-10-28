@@ -10,15 +10,20 @@
     <h1>Acceso denegado</h1>
     <script src="socket.io/socket.io.js"></script>
     <script> var socket=io();
+socket.on("connect",function(){
+    console.log("conectado al servidor")});
     socket.on("connect",function(){
-        console.log("conectado al servidor")});
-        socket.on("connect",function(){
-        console.log("perdimos conexion");
+    console.log("perdimos conexion");
+});
+socket.emit('mensaje', { nombre: 'Maury' } );
+    socket.on("nuevo-mensaje",function(payload){
+        console.log("escuchando:",payload);
     });
-        socket.emit("mensaje",{nombre:"maury"});
-        socket.on("mensaje",function(payload){
-            console.log("escuchando:",payload);
-        })
+    socket.on("active-bands",function(bands){
+     console.clear();
+console.table(bands);
+    });
+      
    </script>
 </body>
 </html>
